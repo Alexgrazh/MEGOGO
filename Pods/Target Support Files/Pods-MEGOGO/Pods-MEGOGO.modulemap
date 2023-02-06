@@ -1,0 +1,6 @@
+framework module Pods_MEGOGO {
+  umbrella header "Pods-MEGOGO-umbrella.h"
+
+  export *
+  module * { export * }
+}
