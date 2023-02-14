@@ -9,12 +9,8 @@ import UIKit
 import SDWebImage
 class HomeCollectionViewCell: UICollectionViewCell {
     
-    
-    
     @IBOutlet weak var imagePoster: UIImageView!
-    
-    @IBOutlet weak var titleMovie: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
        

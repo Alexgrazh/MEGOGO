@@ -13,7 +13,6 @@ class OnbordingCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     
-    @IBOutlet weak var contantLabelTitle: UIView!
     
     @IBOutlet weak var posterImage: UIImageView!
     
@@ -32,6 +31,6 @@ class OnbordingCollectionViewCell: UICollectionViewCell {
     
     func configureLayer(){
         posterImage.layer.cornerRadius = 15
-        contantLabelTitle.layer.cornerRadius = 10
+       
     }
 }

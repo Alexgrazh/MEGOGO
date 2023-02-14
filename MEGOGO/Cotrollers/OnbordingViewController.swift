@@ -11,13 +11,11 @@ class OnbordingViewController: UIViewController {
     
     //MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var nextButton: UIButton!
     
     
-    var slidesArray : [OnbordingSlide] = [OnbordingSlide(title: "MEGOGO", discription: "Збережи всі переваги своєї передплати з тарифом М", image: UIImage(named: "page1") ?? UIImage()),OnbordingSlide(title: "MEGOGO", discription: "Збережи всі переваги своєї передплати з тарифом М", image: UIImage(named: "page1") ?? UIImage())]
+    var slidesArray : [OnbordingSlide] = [OnbordingSlide(title: "Дивись звідки завгодно", discription: "Без обмежень. Зі смартфонів та планшетів,підключених до стільникового зв'язку та Wi-Fi", image: UIImage(named: "мегого5") ?? UIImage()),OnbordingSlide(title: "Тільки самі свіжі новинки", discription: "І про боротьбу зі злом, і про супергероїв, містичні загадки, давні артефакти вже чекають на вас", image: UIImage(named: "мегого4") ?? UIImage())]
     var currentPage = 0 {
         didSet {
             pageControl.currentPage = currentPage
@@ -36,7 +34,6 @@ class OnbordingViewController: UIViewController {
    
     }
  
-
     //MARK: - IBAction
   
     @IBAction func buttonPrassed(_ sender: Any) {
@@ -53,16 +50,12 @@ class OnbordingViewController: UIViewController {
         }
     }
     
-    
     //MARK: - Method
     func configure(){
       nextButton.layer.cornerRadius = 10
     }
     
 }
-
-
-
 
 //MARK: - UICollectionViewDelegate
 
@@ -93,6 +86,7 @@ extension OnbordingViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let width = scrollView.frame.width
         currentPage = Int(scrollView.contentOffset.x / width)

@@ -20,38 +20,53 @@ class HomeDetailsMovieViewController: UIViewController {
     @IBOutlet weak var country: UILabel!
     @IBOutlet weak var hourse: UILabel!
     
+    @IBOutlet weak var playView: UIView!
     
     var imageView = ""
     var nameFilm = ""
     var override = ""
-    var yearsMovie = 0
-    var countryMoive = ""
-    var hourseMovie = 0
+//    var yearsMovie = ""
+//    var countryMoive = ""
+//    var hourseMovie = 0
     var id = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        loadData()
+    
         configure()
-        
-        
+        setupLabel()
     }
+    
     
     func configure(){
         loadImage(path: imageView)
         movieName.text = nameFilm
         infoMovie.text = override
+        playView.cornerRadius = 37.5
+        playView.layer.borderWidth = 1.0
+        playView.layer.borderColor = UIColor.white.cgColor
     }
     
     
+    @IBAction func pressadButton(_ sender: Any) {
+        
+        
+    }
     
-    
-    
-    
-    
-    
-    
-    
+    func setupLabel(){
+        
+        year.backgroundColor = UIColor(red: 90/255, green: 185/255, blue: 170/255, alpha: 1)
+        year.layer.cornerRadius = 10
+        year.layer.masksToBounds = true
+
+        country.backgroundColor = UIColor(red: 90/255, green: 185/255, blue: 170/255, alpha: 1)
+        country.layer.cornerRadius = 10
+        country.layer.masksToBounds = true
+        
+        hourse.backgroundColor = UIColor(red: 90/255, green: 185/255, blue: 170/255, alpha: 1)
+        hourse.layer.cornerRadius = 10
+        hourse.layer.masksToBounds = true
+    }
     
 //    func loadData(){
 //
@@ -72,16 +87,10 @@ class HomeDetailsMovieViewController: UIViewController {
 //    }
     
     
-    func loadImage(path: String){
-        
+    func loadImage(path: String) {
         let imageURLString = "https://image.tmdb.org/t/p/w500" + path
         let imageURL = URL(string: imageURLString)
         posterVideo.sd_setImage(with: imageURL)
+        posterVideo.layer.cornerRadius = 10
     }
-    
-//    func configure(with data: Results){
-//        posterVideo.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500\(data.poster_path ?? "")"))
-//        movieName.text = data.title
-//    }
-    
 }

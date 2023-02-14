@@ -8,8 +8,8 @@
 import UIKit
 import Alamofire
 import SDWebImage
-class HomeViewController: UIViewController {
 
+class HomeViewController: UIViewController {
     
     //MARK: - IBOutlets
     
@@ -20,11 +20,15 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var buttonSorted: UIButton!
     
     var arrayOfImage : [Results] = []
-   
     
+    var timer : Timer!
+    var cerrentPage = 0
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(slideToNext), userInfo: nil, repeats: true)
+    
         //MARK: - CollectionView
         collectionViewOne.delegate = self
         collectionViewOne.dataSource = self
@@ -34,12 +38,21 @@ class HomeViewController: UIViewController {
         loadPosterImage()
         configure()
     }
-
+    
+    @objc func slideToNext(){
+        if cerrentPage < arrayOfImage.count - 1 {
+            cerrentPage = cerrentPage + 1
+        } else {
+           cerrentPage = 0
+        }
+        self.collectionViewOne.scrollToItem(at: IndexPath(item: cerrentPage, section: 0), at: .right , animated: true)
+    }
+    
+    
     func configure(){
         buttonGenres.layer.cornerRadius = 10
         buttonSorted.layer.cornerRadius = 10
     }
-
 }
 
 
@@ -48,9 +61,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController : UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(arrayOfImage[indexPath.row])
-
     }
-
 }
 
 //MARK: - CollctionView dataSourse
@@ -105,15 +116,23 @@ extension HomeViewController : UICollectionViewDataSource {
     }
     
 }
-    extension HomeViewController : UICollectionViewDelegateFlowLayout {
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+extension HomeViewController : UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if collectionView == CollectionViewTwo {
             return CGSize(width: 120, height: 200)
         }
-        
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-            return 25
-        }
+        return CGSize(width: collectionViewOne.frame.width, height: collectionViewOne.frame.height)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 25
+    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let width = scrollView.frame.width
+        cerrentPage = Int(scrollView.contentOffset.x / width)
+    }
+}
+
     
 
